@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Search, TrendingUp, Star, Play, Heart } from 'lucide-react';
 
-const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
-const TMDB_API_KEY = "";
-const API_BASE = `https://api.themoviedb.org/3`;
+
+const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+const API_BASE = "http://ec2-3-138-181-227.us-east-2.compute.amazonaws.com:3000/api/movies";
 
 export default function MvRecApp() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +22,8 @@ export default function MvRecApp() {
   const fetchTrending = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE}/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
+      const response = await fetch(`${API_BASE}/trending`);
+      console.log(response);
       const data = await response.json();
       setTrending(data.results || []);
       setActiveTab('trending');
